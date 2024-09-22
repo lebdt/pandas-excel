@@ -331,6 +331,8 @@ def ExampleTwo():
     df = indexed_df
 
     df_test = pd.DataFrame(indexed_df)
+    print(df_test.groupby("var")["value"].count().to_dict())
+
     df_test.drop("value",axis=1, inplace=True)
 
     for i in range(1,6):
@@ -340,7 +342,8 @@ def ExampleTwo():
         j = np.random.randint(1,4)
         df_test.iloc[i,j] = np.random.random()
 
-    df_test = df_test.reset_index().drop(["var", "SEG"], axis=1).fillna("-")
+    df_test = df_test.reset_index().drop(["var", "SEG"], axis=1)#.fillna("-")
+
 
     def save_to_excel(df, sheet_name="Sheet1", st_row=5, st_col=2):
         xl = "/Users/ebd/pandas_pivot_table_2.xlsx"
@@ -537,7 +540,7 @@ def ExampleTwo():
             gray_format = workbook.add_format({"bg_color": "#909090"})
             return
 
-    save_to_excel(df, st_col=2)
+    # save_to_excel(df, st_col=2)
     # print(df)
     return
 
